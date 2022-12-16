@@ -89,6 +89,7 @@ async def main():
     cfg.application = Application.builder().token(cfg.BOT_TOKEN).build()
         
     await asyncio.gather(
+        asyncio.create_task(track_eth_transfers(cfg.USD_THRESHOLD)),
         asyncio.create_task(track_erc20_transfers(cfg.USD_THRESHOLD)), 
         asyncio.create_task(init_bot())
     )
