@@ -41,7 +41,7 @@ async def track_eth_transfers(usd_threshold=0):
                         if usd_transfer_value <= usd_threshold: continue
                         
                         ##get to, from addresses
-                        tx_hash = tx_data.get("hash").hex()                       
+                        tx_hash = tx_data.get("hash").hex()
                         to_address = brownie.convert.to_address(tx_data.get("to"))
                         from_address = brownie.convert.to_address(tx_data.get("from"))
                         
@@ -62,7 +62,7 @@ async def track_eth_transfers(usd_threshold=0):
                                                 f"`{eth_transfer_value} ETH` "\
                                                 f"(${usd_transfer_value:0,.2f}) "
                             telegram_output=telegram_output.replace(".","\.").replace("(","\(").replace(")","\)").replace("+","\+").replace("-","\-")
-                            telegram_output+=f"[Etherscan](https://etherscan.io/tx/{tx_hash})"
+                            telegram_output+=f"[View Etherscan {tx_hash[:6]}](https://etherscan.io/tx/{tx_hash})"
                             await cfg.application.bot.send_message(cfg.USER_ID,telegram_output,disable_web_page_preview=True,parse_mode=telegram.constants.ParseMode.MARKDOWN_V2)
 
                 except websockets.WebSocketException:
@@ -129,7 +129,7 @@ async def track_erc20_transfers(usd_threshold=0):
                                                 f"`{transfer_value/10**token.decimals} {token.symbol}` "\
                                                 f"(${usd_transfer_value:0,.2f}) "
                             telegram_output=telegram_output.replace(".","\.").replace("(","\(").replace(")","\)").replace("+","\+").replace("-","\-")
-                            telegram_output+=f"[Etherscan](https://etherscan.io/tx/{tx_hash})"
+                            telegram_output+=f"[View Etherscan {tx_hash[:6]}](https://etherscan.io/tx/{tx_hash})"
                             await cfg.application.bot.send_message(cfg.USER_ID,telegram_output,disable_web_page_preview=True,parse_mode=telegram.constants.ParseMode.MARKDOWN_V2)
 
                 except websockets.WebSocketException:

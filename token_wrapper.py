@@ -7,7 +7,15 @@ class Token:
             self.contract = brownie.Contract(address)
         except:        
             self.contract = brownie.Contract.from_explorer(address)
+        
         self.symbol = self.contract.symbol()    
+        if type(self.symbol) == brownie.convert.datatypes.HexString:
+            self.symbol = self.symbol.decode()
+        
+        self.name = self.contract.name()    
+        if type(self.name) == brownie.convert.datatypes.HexString:
+            self.name = self.name.decode()
+            
         self.decimals = self.contract.decimals()
         
         try:
@@ -16,7 +24,7 @@ class Token:
             self._oracle_contract = brownie.Contract.from_explorer(oracle_address)            
 
         self.update_price()
-        print(f"* {self.symbol} ({self.contract.name()}): ${self.price}")
+        print(f"* {self.symbol} ({self.name}): ${self.price}")
     
     def update_price(self) -> None:
         try:
