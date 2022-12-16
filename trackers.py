@@ -54,7 +54,7 @@ async def track_eth_transfers(usd_threshold=0):
                             sent_or_received = "sent (-)"
                         else: continue
 
-                        output=f'{tx_hash}:{wallet} {sent_or_received} {eth_transfer_value} ETH (${usd_transfer_value:0,.2f})'
+                        output=f'ETH Transfer {tx_hash}:{wallet} {sent_or_received} {eth_transfer_value} ETH (${usd_transfer_value:0,.2f})'
                         print(output)
                         
                         if not cfg.SILENCE:                        
@@ -121,7 +121,7 @@ async def track_erc20_transfers(usd_threshold=0):
                             sent_or_received = "sent (-)"
                         else: continue
 
-                        output=f'{tx_hash}:{wallet} {sent_or_received} {transfer_value/10**token.decimals} {token.symbol} (${usd_transfer_value:0,.2f})'
+                        output=f'ERC20 Transfer {tx_hash}:{wallet} {sent_or_received} {transfer_value/10**token.decimals} {token.symbol} (${usd_transfer_value:0,.2f})'
                         print(output)
                         
                         if not cfg.SILENCE:                        
