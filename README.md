@@ -6,5 +6,4 @@
 3. Set wallets and ERC20 tokens you want to track in `config.py`, set `BROWNIE_NETWORK` (defined in `~/.brownie/network_config.yaml`), and USD transfer threshold to monitor
 4. Run `python bot.py`, and send `/start` command in Telegram (`/stop` to stop messages)
 
-
-
+![telegram-screenshot](https://user-images.githubusercontent.com/35244185/208053457-ba44d88f-a88a-4bd6-93db-c557b20d3a3b.png)
