@@ -1,17 +1,12 @@
-import sys
 import eth_abi
-from collections import deque
-import asyncio
-import asyncio.locks
 import json
 import websockets
 import brownie
 import telegram.constants
 import config as cfg
-import time
 
 ##For details on subscribing to JSON-RPC notifications : https://geth.ethereum.org/docs/rpc/pubsub
-## event types: newHeads, logs (filter for emitted Events), pendingTransactions
+## event types: newHeads, logs (filter for emitted Events)
 async def track_eth_transfers(usd_threshold=0):
     async for websocket in websockets.connect(uri=brownie.web3.provider.endpoint_uri):        
         try:

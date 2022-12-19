@@ -2,11 +2,10 @@ import os
 
 token_dict={}
 BOT_TOKEN = os.environ.get('TELEGRAM_API_KEY')
-USER_ID = int(os.environ.get('TELEGRAM_USER_ID'))
-
+USER_ID = int(os.environ.get('TELEGRAM_CHAT_ID'))
 
 BROWNIE_NETWORK = "mainnet-localnode-ws" #"mainnet-alchemy-wss"
-SILENCE = True #By default, show nothing. Send command /start to turn off SILENCE
+SILENCE = True #By default, show nothing. Send Telegram command /start to turn off SILENCE
 USD_THRESHOLD=100
 
 #FORMAT :: address: name_label
@@ -29,6 +28,7 @@ WALLETS_TRACKED = {
     "0xE11970f2F3dE9d637Fb786f2d869F8FeA44195AC":"AMBER",
     "0xBb98F2A83d78310342dA3e63278cE7515D52619d":"AMBER_OTC",
     "0x58f5F0684C381fCFC203D77B2BbA468eBb29B098":"BLOCKTOWER_CAPITAL",
+    "0x8e04Af7F7c76daA9AB429b1340E0327B5B835748":"THREE_ARROWS_CAPITAL",
 }
 
 #FORMAT :: token contract: oracle_contract

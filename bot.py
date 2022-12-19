@@ -1,19 +1,19 @@
-import dotenv
-import logging
-dotenv.load_dotenv()
-from functools import wraps
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 from telegram import __version__ as TG_VER
 
-import brownie
+import logging
+import dotenv
+dotenv.load_dotenv()
+from functools import wraps
 import asyncio
+import nest_asyncio
+nest_asyncio.apply()
+
+import brownie
 from token_wrapper import Token
 from trackers import track_eth_transfers, track_erc20_transfers
 import config as cfg
-
-import nest_asyncio
-nest_asyncio.apply()
 
 try:
     from telegram import __version_info__
@@ -32,17 +32,17 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
     
-# create a decorator called auth that receives USER_ID as an argument with wraps
+# Decorator for checking user ID matches chat ID
 def auth(user_id):
-    def decorator(func):
+    def outer_wrapper(func):
         @wraps(func)
         async def wrapper(update, context):
             if update.effective_user.id == user_id:
                 await func(update, context)
             else:
-                await update.message.reply_text("You are not authorized to use this bot")
+                await update.message.reply_text("This Chat ID is not authorized. User ID needs to match your Chat ID.")
         return wrapper
-    return decorator
+    return outer_wrapper
 
 # Define a few command handlers. These usually take the two arguments update and context.
 @auth(cfg.USER_ID)
