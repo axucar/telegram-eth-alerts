@@ -77,8 +77,7 @@ async def track_erc20_transfers(usd_threshold=0):
     async for websocket in websockets.connect(uri=brownie.web3.provider.endpoint_uri):
         try:
             
-            await websocket.send(
-                json.dumps(
+            await websocket.send(json.dumps(
                     {
                         "id": 1,
                         "method": "eth_subscribe",
